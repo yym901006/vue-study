@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <router-view></router-view> -->
-    <VuexTest></VuexTest>
+    <h1>Home Page</h1>
+    <router-view></router-view>
+    <!-- <VuexTest></VuexTest> -->
   </div>
 </template>
 
