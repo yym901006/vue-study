@@ -49,18 +49,18 @@ export default {
 
       // 根匹配只要不是home，就作为home下一级
       if (!this.isHome(first)) {
-        matched = [{ redirect: "/home", meta: { title: "首页" } }].concat(matched);
+        matched = [{ path: '/', redirect: "/home", meta: { title: "首页" } }].concat(matched);
       }
 
       // 处理完指定到levelList
       this.levelList = matched
     },
     isHome(route) {
-      const name = route && route.name;
-      if (!name) {
+      const redirect = route && route.redirect;
+      if (!redirect) {
         return false;
       }
-      return name.trim().toLocaleLowerCase() === "home".toLocaleLowerCase();
+      return redirect === "/home";
     },
     pathCompile(path) {
       // 把参数拿出来
