@@ -55,7 +55,7 @@ export const asyncRoutes = [
             import(/* webpackChunkName: "home" */ "@/views/About.vue"),
           name: "about",
           meta: { 
-              title: "About", 
+              title: "用户中心", 
               icon: "qq",
               roles: ['editor']
           },
@@ -66,7 +66,7 @@ export const asyncRoutes = [
             import(/* webpackChunkName: "home" */ "@/views/About.vue"),
           name: "bla",
           meta: { 
-              title: "About", 
+              title: "关于我们", 
               icon: "qq",
               roles: ['admin']
           },

@@ -15,6 +15,10 @@ import "./plugins/element.js";
 // 路由守卫
 import "./permission";
 
+import vPermission from "./directive/permission";
+
+Vue.directive("permission", vPermission);
+
 Vue.config.productionTip = false;
 
 // Vue.prototype.$dispatch = function(eventName, data) {

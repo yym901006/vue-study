@@ -1,5 +1,6 @@
 // resolve定义一个绝对路径获取函数
 const path = require('path')
+const bodyParser = require("body-parser");
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -12,7 +13,55 @@ const title = 'vue项目最佳实践';
 module.exports = {
     publicPath: 'best-practice',
     devServer: {
-        port
+        port,
+        proxy: {
+            // 代理 /dev-api/user/login 到 http://127.0.0.1:3000/user/login
+            [process.env.VUE_APP_BASE_API]: {
+              target: `http://127.0.0.1:3000/`,
+              changeOrigin: true, // 要不要变更origin头
+              pathRewrite: { // 地址重写：http://127.0.0.1:3000/user/login
+                ["^" + process.env.VUE_APP_BASE_API]: ""
+              }
+            }
+          },
+        // before: app => {
+        //     // node服务器代码 基于express
+        //     // bodyPaser用来解析post请求中的json数据
+        //     app.use(bodyParser.json());
+        //     // app.use(
+        //     //   bodyParser.urlencoded({
+        //     //     extended: true
+        //     //   })
+        //     // );
+        //     //登录接口声明
+        //     app.post("/dev-api/user/login", (req, res) => {
+        //       const { username } = req.body;
+      
+        //       if (username === "admin" || username === "jerry") {
+        //         res.json({
+        //           code: 1,
+        //           data: username
+        //         });
+        //       } else {
+        //         res.json({
+        //           code: 10204,
+        //           message: "用户名或密码错误"
+        //         });
+        //       }
+        //     });
+      
+        //     app.get("/dev-api/user/info", (req, res) => {
+        //         // 从请求头中获取令牌
+        //         // adfasdfkadf; ja;kdfj;akdfjakdsfj;akjdf; akjdf;kalsjf;ajf
+        //         // 令牌头         令牌体                     哈希
+        //         // 加密算法        用户信息；有效期          
+        //       const roles = req.headers['x-token'] === "admin" ? ["admin"] : ["editor"];
+        //       res.json({
+        //         code: 1,
+        //         data: roles
+        //       });
+        //     });
+        //   }
     },
     configureWebpack: {
         name: title
