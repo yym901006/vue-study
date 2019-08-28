@@ -1,6 +1,8 @@
 <template>
     <div>
-        Index Page
+        <h2>Index Page</h2>
+        <p>num: {{$store.state.count}}</p>
+        <button @click="$store.commit('add')">add</button>
     </div>
 </template>
 
@@ -10,6 +12,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

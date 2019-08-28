@@ -1,10 +1,7 @@
-// 导入两个webpack插件，分别负责生成服务端和客户端bundle
 const VueSSRServerPlugin = require("vue-server-renderer/server-plugin");
 const VueSSRClientPlugin = require("vue-server-renderer/client-plugin");
-// 优化策略
 const nodeExternals = require("webpack-node-externals");
 const merge = require("lodash.merge");
-// 根据WEBPACK_TARGET环境变量做响应输出
 const TARGET_NODE = process.env.WEBPACK_TARGET === "node";
 const target = TARGET_NODE ? "server" : "client";
 
@@ -12,18 +9,18 @@ module.exports = {
   css: {
     extract: false
   },
-  outputDir: './dist/' + target,
+  outputDir: "./dist/" + target,
   configureWebpack: () => ({
     // 将 entry 指向应用程序的 server / client 文件
-    entry: `./src/entry-${target}.js`,
+    entry: `./src/${target}-entry.js`,
     // 对 bundle renderer 提供 source map 支持
-    devtool: 'source-map',
+    devtool: "source-map",
     // 这允许 webpack 以 Node 适用方式处理动态导入(dynamic import)，
     // 并且还会在编译 Vue 组件时告知 `vue-loader` 输送面向服务器代码(server-oriented code)。
     target: TARGET_NODE ? "node" : "web",
-    // mock node中一些全局变量
     node: TARGET_NODE ? undefined : false,
-    output: {
+
+    output: {      
       // 此处告知 server bundle 使用 Node 风格导出模块
       libraryTarget: TARGET_NODE ? "commonjs2" : undefined
     },
