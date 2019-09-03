@@ -36,7 +36,7 @@ function renderToString(context) {
 //         </div>
 //     `
 // })
-app.use(express.static('../dist/client'))
+app.use(express.static('../dist/client', {index: false}))
 app.get('*', async function(req, res){
     // renderToString可以将vue实例转换为html字符串
     // 若未传递回调函数，则返回Promise
