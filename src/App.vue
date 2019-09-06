@@ -1,8 +1,19 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="#/">Home</router-link> |
-      <router-link to="#/about">About</router-link>
+      <router-link to="#/">
+        <svg-icon icon-class="qq" ></svg-icon>
+        <!-- <svg>
+          <use xlink:href="#icon-qq"></use>
+        </svg> -->
+        Home
+      </router-link> |
+      <router-link to="#/about">
+        <!-- <svg>
+          <use xlink:href="#icon-wx"></use>
+        </svg> -->
+        <svg-icon icon-class="wx"></svg-icon>
+      About</router-link>
     </div>
     <!-- 插座 -->
     <router-view/>
@@ -32,6 +43,8 @@ import SlotsTest from "./components/slots";
 import Recursion from "./components/recursion";
 import KFormTest from "./components/form";
 import TreeTest from './components/tree';
+// import '@/icons/svg/qq.svg'
+// import '@/icons/svg/wx.svg'
 
 export default {
   name: "app",
