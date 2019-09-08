@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="#/">
+      <router-link to="/home">
         <svg-icon icon-class="qq" ></svg-icon>
         <!-- <svg>
           <use xlink:href="#icon-qq"></use>
         </svg> -->
         Home
       </router-link> |
-      <router-link to="#/about">
+      <router-link to="/about">
         <!-- <svg>
           <use xlink:href="#icon-wx"></use>
         </svg> -->
@@ -16,7 +16,8 @@
       About</router-link>
     </div>
     <!-- 插座 -->
-    <router-view/>
+    <router-view></router-view>
+
     <!-- <TreeTest></TreeTest> -->
     <!-- <KFormTest></KFormTest> -->
     <!-- <HelloWorld 

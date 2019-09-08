@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Layout from '@/layout/index.vue'; // 布局页
+import Layout from '@/layout'; // 布局页
 
 Vue.use(Router);
 
@@ -13,20 +13,20 @@ export const constRoutes = [
   },
   {
     path: "/",
-    component: import(/* webpackChunkName: "home" */ "@/views/Home.vue"),// 应用布局
-    // redirect: "/home",
-    // children: [
-    //   {
-    //     path: "home",
-    //     component: () =>
-    //       import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
-    //     name: "home",
-    //     meta: { 
-    //         title: "Home", // 导航菜单项标题
-    //         icon: "qq" // 导航菜单项图标
-    //     }
-    //   }
-    // ]
+    component: Layout,// 应用布局
+    redirect: "/home",
+    children: [
+      {
+        path: "home",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "home",
+        meta: { 
+            title: "Home", // 导航菜单项标题
+            icon: "qq" // 导航菜单项图标
+        }
+      }
+    ]
   }
 ];
 
