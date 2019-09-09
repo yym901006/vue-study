@@ -9,8 +9,11 @@ import store from './store'
 
 import './icons'
 import './permission'
+import vPermission from './directive/permission'
+import './plugins/element.js'
 
 Vue.config.productionTip = false;
+Vue.directive('permission', vPermission)
 
 Vue.prototype.$dispatch = function(eventName, data) {
   let parent = this.$parent;

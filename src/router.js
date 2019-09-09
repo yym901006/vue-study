@@ -15,6 +15,7 @@ export const constRoutes = [
     path: "/",
     component: Layout,// 应用布局
     redirect: "/home",
+    meta: {title: 'abc',icon:'qq',breadcrumb:false},
     children: [
       {
         path: "home",
@@ -24,6 +25,16 @@ export const constRoutes = [
         meta: { 
             title: "Home", // 导航菜单项标题
             icon: "qq" // 导航菜单项图标
+        }
+      },
+      {
+        path: "other",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "other",
+        meta: { 
+            title: "lalala", // 导航菜单项标题
+            icon: "wx" // 导航菜单项图标
         }
       }
     ]
