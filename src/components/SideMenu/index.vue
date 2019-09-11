@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import Item from "@/components/tree/Item";
+import Item from "./Item";
 import {mapGetters} from 'vuex';
 
 export default {
