@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Hello, Vue!"></HelloWorld>
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/hello">欢迎页</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
