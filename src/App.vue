@@ -3,18 +3,27 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <!-- 组件通信 -->
-    <Communicate></Communicate>
+    <!-- <Communicate></Communicate> -->
+    <!-- 插槽 -->
+    <!-- <SlotTest></SlotTest> -->
+    <!-- 递归 -->
+    <!-- <Recursion></Recursion> -->
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Communicate from "@/components/communicate";
+import SlotTest from "@/components/slots";
+import Recursion from "@/components/recursion";
+
 export default {
   name: "app",
   components: {
     HelloWorld,
-    Communicate
+    Communicate,
+    SlotTest,
+    Recursion
   }
 };
 </script>
