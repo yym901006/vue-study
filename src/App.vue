@@ -1,13 +1,18 @@
 <template>
   <div id="app">
+    <nav>
+      <router-link to="/">home</router-link>
+      <router-link to="/about">about</router-link>
+    </nav>
+    <router-view></router-view>
     <!-- <KFormTest></KFormTest> -->
     <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <HelloWorld msg="Welcome to Your Vue.js App" foo="foo" ref="hw" />
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" foo="foo" ref="hw" />
     <HelloWorld>
       <template v-slot:default>abc</template>
       <template v-slot:content="slotProps">content...{{slotProps.xx}}</template> -->
       <!-- <template v-slot:content="{xx}">content...{{xx}}</template> -->
-    </HelloWorld>
+    <!-- </HelloWorld> -->
     <!-- 组件通信 -->
     <!-- <Communicate></Communicate> -->
     <!-- 插槽 -->
