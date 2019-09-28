@@ -1,10 +1,12 @@
 <template>
-  <div class="hello">
+  <div class="hello" @click="saySth2Bro">
     <h1>{{ msg }}</h1>
     <p>{{$attrs.foo}}</p>
     <p>{{xx}}</p>
     <p>{{something}}</p>
-    <p><slot></slot></p>
+    <p>
+      <slot></slot>
+    </p>
     <p>
       <slot name="content" :xx="xx"></slot>
     </p>
@@ -13,24 +15,35 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  inject: ['something'],
+  name: "HelloWorld",
+  inject: ["something"],
   props: {
     msg: String
   },
   data() {
     return {
-      xx: 'x'
-    }
+      xx: "x"
+    };
   },
-  mounted(){
-    this.$on('foo', () => {
-      console.log('foo~~~');
-    })
-
-    this.$emit('foo')
+  mounted() {
+    // 通过共同父组件做中介
+    this.$parent.$on("foo", comp => {
+      if (comp !== this) {
+        console.log("foo~~");
+      }
+    });
+    // setTimeout(() => {
+    //   // 父组件派发消息可以在所有兄弟内监听
+    //   this.$parent.$emit('foo', this)
+    // }, 1000);
+  },
+  methods: {
+    saySth2Bro() {
+      // 父组件派发消息可以在所有兄弟内监听
+      this.$parent.$emit("foo", this);
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
