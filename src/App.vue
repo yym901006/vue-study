@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">home</router-link>
-      <router-link to="/about">about</router-link>
+      <router-link to="/">
+        <svg-icon icon-class="wx"></svg-icon>
+        home
+      </router-link>
+      <router-link to="/about">
+        <svg-icon icon-class="qq"></svg-icon>
+        about</router-link>
     </nav>
     <router-view></router-view>
     <!-- <KFormTest></KFormTest> -->

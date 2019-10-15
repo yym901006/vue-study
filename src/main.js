@@ -1,14 +1,16 @@
 import Vue from "vue";
 import App from "./App.vue";
 import emitter from "./mixins/emitter";
-import Bus from './utils/bus';
+import Bus from "./utils/bus";
 
-// import router from './router'
-// import store from './store'
+import router from "./router";
+import store from "./store";
 
-import router from './krouter'
-import store from './kstore'
+// import router from './krouter'
+// import store from './kstore'
 
+import "@/icons";
+import './permission'
 
 Vue.config.productionTip = false;
 Vue.mixin(emitter);
@@ -18,5 +20,5 @@ Vue.prototype.$bus = new Bus();
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount("#app");

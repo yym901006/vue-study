@@ -1,8 +1,3 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 const count = {
   namespaced: true,
   state: { count: 10 },
@@ -32,9 +27,4 @@ const count = {
   }
 };
 
-export default new Vuex.Store({
-  modules: {
-    a: count
-  }
-
-})
+export default count
