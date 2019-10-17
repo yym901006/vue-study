@@ -11,6 +11,9 @@ import store from "./store";
 
 import "@/icons";
 import './permission'
+import vp from './directive/permission'
+import './plugins/element.js'
+Vue.directive('permission', vp);
 
 Vue.config.productionTip = false;
 Vue.mixin(emitter);

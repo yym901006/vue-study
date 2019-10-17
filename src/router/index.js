@@ -47,6 +47,17 @@ export const asyncRoutes = [
             icon: "qq",
             roles: ['admin', 'editor']
         },
+      },
+      {
+        path: "abc",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/About.vue"),
+        name: "abc",
+        meta: { 
+            title: "abc", 
+            icon: "wx",
+            roles: ['admin', 'editor']
+        },
       }
     ]
   }
