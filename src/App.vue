@@ -1,7 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+
+    <!-- form测试 -->
+    <form-test></form-test>
+
+    <!-- <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld>      
+      <template>abc</template> -->
+      <!-- 作用域插槽：显示数据来自子组件 -->
+      <!-- <template v-slot:content="{foo}">content...{{foo}}</template>
+    </HelloWorld>
+    <HelloWorld msg="Welcome to Your Vue.js App" 
+      foo="foo" ref="hw" @myclick="onMyClick"/> -->
+    
     <!-- 组件通信 -->
     <!-- <Communicate></Communicate> -->
     <!-- 插槽 -->
@@ -16,15 +27,33 @@ import HelloWorld from "./components/HelloWorld.vue";
 import Communicate from "@/components/communicate";
 import SlotTest from "@/components/slots";
 import Recursion from "@/components/recursion";
+import FormTest from '@/components/form'
 
 export default {
   name: "app",
+  provide(){
+    return {
+      foo: 'foo'
+    }
+  },
   components: {
     HelloWorld,
     Communicate,
     SlotTest,
-    Recursion
-  }
+    Recursion,
+    FormTest
+  },
+  mounted() {
+    // this.$refs.hw.xx = 'xxxxxx'
+    // 子组件实例的顺序不保证的
+    // this.$children[0].xx = 'oo'
+  },
+  methods: {
+    onMyClick() {
+      console.log('myclick');
+      
+    }
+  },
 };
 </script>
 
