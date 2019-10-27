@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-
+    <!-- 路由 -->
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <!-- 路由视图 -->
+    <router-view></router-view>
+    
     <!-- form测试 -->
-    <form-test></form-test>
+    <!-- <form-test></form-test> -->
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld>      

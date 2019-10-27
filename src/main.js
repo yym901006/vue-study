@@ -3,6 +3,8 @@ import App from "./App.vue";
 import emitter from "./mixins/emitter";
 import Bus from './utils/bus';
 import create from './utils/create';
+import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false;
 Vue.mixin(emitter);
@@ -13,5 +15,8 @@ new Vue({
   data: {
     bar: 'bar'
   },
-  render: h => h(App),
+
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");
