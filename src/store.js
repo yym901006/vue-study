@@ -1,5 +1,6 @@
 import Vue from "vue";
-import Vuex from "vuex";
+// import Vuex from "vuex";
+import Vuex from "./kvuex";
 
 Vue.use(Vuex);
 
@@ -22,12 +23,12 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           // 添加业务逻辑
-          if (getters.left > 0) {
+          // if (getters.left > 0) {
             commit("increment");
             resolve();
             return;
-          }
-          reject();
+          // }
+          // reject();
         }, 1000);
       });
     },

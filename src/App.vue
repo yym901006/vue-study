@@ -5,7 +5,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <!-- 路由视图 -->
+    <!-- 4.路由视图 -->
+    <!-- 问题：router-link和router-view是哪来的 -->
     <router-view></router-view>
     
     <!-- form测试 -->

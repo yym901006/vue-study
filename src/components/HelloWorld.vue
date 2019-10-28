@@ -4,7 +4,7 @@
     <!-- vuex -->
     <div>
       <div>冲啊，手榴弹扔了{{$store.state.count}}个</div>
-      <span>还剩{{$store.getters.left}}个</span>
+      <!-- <span>还剩{{$store.getters.left}}个</span> -->
       <p>
         <button @click="add">扔一个</button>
         <button @click="asyncAdd">蓄力扔一个</button>

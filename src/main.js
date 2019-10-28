@@ -16,7 +16,7 @@ new Vue({
     bar: 'bar'
   },
 
-  router,
+  router, // 配置router实例
   store,
   render: h => h(App)
 }).$mount("#app");

@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "Item",
+  name: "Item", // 必须设置
   props: {
     model: Object
   },
