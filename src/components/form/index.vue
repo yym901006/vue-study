@@ -13,6 +13,7 @@
     </k-form>
     <!-- .sync和v-model有和区别？ -->
     {{model}}
+    <Tree></Tree>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import KInput from "@/components/form/KInput.vue";
 import KFormItem from "@/components/form/KFormItem.vue";
 import KForm from "@/components/form/KForm.vue";
 import Notice from "@/components/Notice.vue";
+import Tree from '@/components/tree'
 
 export default {
   data() {
@@ -36,7 +38,7 @@ export default {
     KInput,
     KFormItem,
     KForm,
-    Notice
+    Tree
   },
   methods: {
     onLogin() {
