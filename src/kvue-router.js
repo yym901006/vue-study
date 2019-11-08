@@ -27,8 +27,8 @@ class KVueRouter {
     window.addEventListener("hashchange", this.onHashchange.bind(this));
   }
   onHashchange() {
-      console.log(window.location.hash);
-      
+    console.log(window.location.hash);
+
     this.app.current = window.location.hash.slice(1) || "/";
   }
 
@@ -60,11 +60,13 @@ class KVueRouter {
     });
     // 获取path对应的Component将它渲染出来
     Vue.component("router-view", {
-        render: (h) => {
-            const Component = this.routeMap[this.app.current].component;
-            return h(Component)
-        }
-    })
+      functional: true,
+      render(h, {parent}) {
+        const router = parent.$router;
+        const Component = router.routeMap[router.app.current].component;
+        return h(Component);
+      },
+    });
   }
 }
 
