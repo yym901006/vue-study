@@ -5,6 +5,8 @@ import Bus from './utils/bus';
 import create from './utils/create';
 import router from './router'
 import store from './store'
+import './icons/index'
+import './permission'
 
 Vue.config.productionTip = false;
 Vue.mixin(emitter);

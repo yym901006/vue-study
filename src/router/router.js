@@ -1,6 +1,6 @@
 import Vue from 'vue'
-// import Router from 'vue-router'
-import Router from './kvue-router'
+import Router from 'vue-router'
+// import Router from './kvue-router'
 import Home from './views/Home.vue'
 
 // 1.应用插件：做了什么？

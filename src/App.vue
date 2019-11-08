@@ -2,25 +2,33 @@
   <div id="app">
     <!-- 路由 -->
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">
+        <svg-icon icon-class="wx"></svg-icon>
+        <!-- <svg>
+          <use xlink:href="#icon-wx"></use>
+        </svg>-->
+        Home
+      </router-link>|
+      <router-link to="/about">
+        <svg-icon icon-class="qq"></svg-icon>About
+      </router-link>
     </div>
     <!-- 4.路由视图 -->
     <!-- 问题：router-link和router-view是哪来的 -->
     <router-view></router-view>
-    
+
     <!-- form测试 -->
     <!-- <form-test></form-test> -->
 
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld>      
-      <template>abc</template> -->
-      <!-- 作用域插槽：显示数据来自子组件 -->
-      <!-- <template v-slot:content="{foo}">content...{{foo}}</template>
+    <template>abc</template>-->
+    <!-- 作用域插槽：显示数据来自子组件 -->
+    <!-- <template v-slot:content="{foo}">content...{{foo}}</template>
     </HelloWorld>
     <HelloWorld msg="Welcome to Your Vue.js App" 
-      foo="foo" ref="hw" @myclick="onMyClick"/> -->
-    
+    foo="foo" ref="hw" @myclick="onMyClick"/>-->
+
     <!-- 组件通信 -->
     <!-- <Communicate></Communicate> -->
     <!-- 插槽 -->
@@ -35,14 +43,15 @@ import HelloWorld from "./components/HelloWorld.vue";
 import Communicate from "@/components/communicate";
 import SlotTest from "@/components/slots";
 import Recursion from "@/components/recursion";
-import FormTest from '@/components/form'
+import FormTest from "@/components/form";
+// import '@/icons/svg/wx.svg'
 
 export default {
   name: "app",
-  provide(){
+  provide() {
     return {
-      foo: 'foo'
-    }
+      foo: "foo"
+    };
   },
   components: {
     HelloWorld,
@@ -58,10 +67,9 @@ export default {
   },
   methods: {
     onMyClick() {
-      console.log('myclick');
-      
+      console.log("myclick");
     }
-  },
+  }
 };
 </script>
 
