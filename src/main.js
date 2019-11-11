@@ -7,11 +7,14 @@ import router from './router'
 import store from './store'
 import './icons/index'
 import './permission'
+import vp from './directive/permission'
+import './plugins/element.js'
 
 Vue.config.productionTip = false;
 Vue.mixin(emitter);
 Vue.prototype.$bus = new Bus();
 Vue.prototype.$create = create;
+Vue.directive('permission', vp);
 
 new Vue({
   data: {

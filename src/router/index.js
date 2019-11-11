@@ -36,6 +36,7 @@ export const asyncRoutes = [
     path: "/about",
     component: Layout,
     redirect: "/about/index",    
+    meta: {title:'用户中心'},
     children: [
       {
         path: "index",
@@ -47,6 +48,16 @@ export const asyncRoutes = [
             icon: "qq",
             roles: ['admin', 'editor']
         },
+      },
+      {
+        path: "abc",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "abc",
+        meta: { 
+            title: "abc", // 导航菜单项标题
+            icon: "wx" // 导航菜单项图标
+        }
       }
     ]
   }
