@@ -73,6 +73,9 @@ class Compiler {
     return attr.indexOf('k-') === 0
   }
 
+  // 更新函数作用：
+  // 1.初始化
+  // 2.创建Watcher实例
   update(node, exp, dir) {
     // 初始化
     // 指令对应更新函数xxUpdater
