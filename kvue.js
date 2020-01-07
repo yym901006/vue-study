@@ -1,11 +1,16 @@
 function defineReactive(obj, key, val) {
   // 递归
   observe(val)
+
+  // 创建一个Dep和当前key一一对应
+  const dep = new Dep()
   
   // 对传入obj进行访问拦截
   Object.defineProperty(obj, key, {
     get() {
       console.log('get ' + key);
+      // 依赖收集在这里
+      Dep.target && dep.addDep(Dep.target)
       return val
     },
     set(newVal) {
@@ -14,6 +19,10 @@ function defineReactive(obj, key, val) {
         // 如果传入的newVal依然是obj，需要做响应化处理
         observe(newVal)
         val = newVal
+
+        // 通知更新
+        // watchers.forEach(w => w.update())
+        dep.notify()
       }
     }
   })
@@ -31,6 +40,7 @@ function observe(obj) {
 
 // 代理函数，方便用户直接访问$data中的数据
 function proxy(vm, sourceKey) {
+  // vm[sourceKey]就是vm[$data]
   Object.keys(vm[sourceKey]).forEach(key => {
     // 将$data中的key代理到vm属性中
     Object.defineProperty(vm, key, {
@@ -56,6 +66,9 @@ class KVue {
 
     // 代理
     proxy(this, '$data')
+
+    // 创建编译器
+    new Compiler(options.el, this)
   }
 }
 
@@ -78,4 +91,42 @@ class Observer {
   }
 
   // 数组数据响应化，待补充
+}
+
+// 观察者:保存更新函数，值发生变化调用更新函数
+// const watchers = []
+class Watcher {
+  constructor(vm, key, updateFn) {
+    this.vm = vm
+
+    this.key = key
+
+    this.updateFn = updateFn
+
+    // watchers.push(this)
+
+    // Dep.target静态属性上设置为当前watcher实例
+    Dep.target = this
+    this.vm[this.key] // 读取触发了getter
+    Dep.target = null // 收集完就置空
+  }
+
+  update() {
+    this.updateFn.call(this.vm, this.vm[this.key])
+  }
+}
+
+// Dep：依赖，管理某个key相关所有Watcher实例
+class Dep {
+  constructor(){
+    this.deps = []
+  }
+
+  addDep(dep) {
+    this.deps.push(dep)
+  }
+
+  notify() {
+    this.deps.forEach(dep => dep.update())
+  }
 }
