@@ -9,12 +9,12 @@
 <body>
   <div id="app">
     <!-- 插值 -->
-    <p>{{counter}}</p>
-    <p>{{counter}}</p>
-    <p>{{counter}}</p>
+    <p @click="add">{{counter}}</p>
     <!-- 指令 -->
     <p k-text="counter"></p>
     <p k-html="desc"></p>
+    <!-- k-model -->
+    <input type="text" k-model="desc">
   </div>
 
   <script src="compile.js"></script>
@@ -27,11 +27,16 @@
         counter: 1,
         desc:'<span style="color:red">kvue可还行？</span>'
       },
+      methods: {
+        add() {
+          this.counter++
+        }
+      }
     })
-    setInterval(() => {
-      app.counter++
-      // app.$data.counter++
-    }, 1000);
+    // setInterval(() => {
+    //   app.counter++
+    //   // app.$data.counter++
+    // }, 1000);
     
   </script>
 </body>
