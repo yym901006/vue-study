@@ -36,7 +36,7 @@ server.get('/', (req, res) => {
 })
 
 // 监听端口
-server.listen(80, () => {
+server.listen(3000, () => {
   console.log('server running!');
 
 })
