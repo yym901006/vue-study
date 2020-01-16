@@ -1,18 +1,15 @@
-// 调用刚才main里面的工厂函数创建实例
-import {createApp} from './main'
+import { createApp } from "./main";
 
-// 该函数会被express路由处理函数调用，用于创建vue实例
+// 返回一个函数，接收请求上下文，返回创建的vue实例
 export default context => {
-  // 返回promise，确保异步的操作都结束
+  // 这里返回一个Promise，确保路由或组件准备就绪
   return new Promise((resolve, reject) => {
-    const {app, router} = createApp(context)
-
-    // 显示首屏处理
-    router.push(context.url)
-
-    // 检测路由就绪事件
+    const { app, router } = createApp(context);
+    // 跳转到首屏的地址
+    router.push(context.url);
+    // 路由就绪，返回结果
     router.onReady(() => {
-      resolve(app)
-    }, reject)
-  })
-}
+      resolve(app);
+    }, reject);
+  });
+};

@@ -3,8 +3,6 @@ import App from './App.vue'
 
 import { createRouter } from './router/index';
 
-Vue.config.productionTip = false
-
 // 返回工厂函数，每次请求创建一个Vue实例
 export function createApp(context) {
   // 1.创建路由器实例
