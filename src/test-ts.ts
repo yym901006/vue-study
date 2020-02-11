@@ -86,20 +86,17 @@ greeting("tom");
 // 先声明，在实现
 // 同名声明有多个
 function watch(cb1: () => void): void;
-function watch(cb1: () => void, cb2: (v1:any, v2:any) => void): void;
+function watch(cb1: () => void, cb2: (v1: any, v2: any) => void): void;
 // 实现
-function watch(cb1:() => void, cb2?: (v1:any, v2:any) => void) {
+function watch(cb1: () => void, cb2?: (v1: any, v2: any) => void) {
   if (cb1 && cb2) {
-    console.log('执行重载2');
-    
+    console.log("执行重载2");
   } else {
-    console.log('执行重载1');
-    
+    console.log("执行重载1");
   }
 }
 
 // watch()
-
 
 // 03-class.ts
 class Parent {
@@ -123,9 +120,88 @@ class Parent {
 }
 class Child extends Parent {
   say() {
-    this.bar
+    this.bar;
   }
 }
-const p = new Parent()
-const c = new Child()
+const p = new Parent();
+const c = new Child();
 
+// 接口
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+// greeting函数通过Person接口约束参数解构
+function greeting2(person: Person) {
+  return "Hello, " + person.firstName + " " + person.lastName;
+}
+greeting2({ firstName: "Jane", lastName: "User" }); // 正确
+// greeting2({firstName: 'Jane'}); // 错误
+
+// 不用泛型
+// interface Result {
+//   ok: 0 | 1;
+//   data: Feature[];
+// }
+
+// 使用泛型
+interface Result<T> {
+  ok: 0 | 1;
+  data: T;
+}
+
+// 泛型方法
+function getResult<T>(data: T): Result<T> {
+  return { ok: 1, data };
+}
+// 用尖括号方式指定T为string
+getResult<string>("hello");
+// 用类型推断指定T为number
+getResult(1);
+
+// 装饰器原理
+//类装饰器表达式会在运行时当作函数被调用，类的构造函数作为其唯一的参数。
+function log(target: Function) {
+  // target是构造函数
+  console.log(target === Foo); // true
+  target.prototype.log = function() {
+    console.log(this.bar);
+  };
+}
+
+// 方法装饰器有三个参数
+function dong(target: any, name: string, descriptor: any) {
+  // 这里通过修改descriptor.value扩展了bar方法
+  const baz = descriptor.value;
+  descriptor.value = function(val: string) {
+      console.log('dong~~');
+      // 原始逻辑
+      baz.call(this, val);
+  }
+  return descriptor
+}
+
+// 属性装饰器
+function mua(option:string) {
+  return function (target, name) {
+    target[name] = option
+  }
+}
+
+
+@log
+class Foo {
+  bar = "bar";
+
+  @mua('mua~~')
+  ns!:string;
+
+  @dong
+  setBar(val: string) {
+    this.bar = val
+  }
+}
+
+const foo = new Foo();
+// @ts-ignore
+foo.log();
