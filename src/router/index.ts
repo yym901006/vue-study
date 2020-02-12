@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter, {RouteConfig, Route} from 'vue-router'
 import Home from '../views/Home.vue'
 
 // 1.应用插件
 Vue.use(VueRouter)
 
-const routes = [
+const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'home',
@@ -26,6 +26,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// 3.路由守卫
+router.beforeEach((to: Route, from, next) => {
+  next()
 })
 
 export default router

@@ -160,7 +160,8 @@ getResult<string>("hello");
 getResult(1);
 
 // 装饰器原理
-//类装饰器表达式会在运行时当作函数被调用，类的构造函数作为其唯一的参数。
+// 类装饰器参数只有一个就是类构造函数
+// 表达式会在运行时当作函数被调用，类的构造函数作为其唯一的参数。
 function log(target: Function) {
   // target是构造函数
   console.log(target === Foo); // true
@@ -169,8 +170,10 @@ function log(target: Function) {
   };
 }
 
-// 方法装饰器有三个参数
+// 方法装饰器有三个参数：1-实例，2-方法名
 function dong(target: any, name: string, descriptor: any) {
+  console.log(target,name,descriptor);
+  
   // 这里通过修改descriptor.value扩展了bar方法
   const baz = descriptor.value;
   descriptor.value = function(val: string) {
@@ -178,11 +181,12 @@ function dong(target: any, name: string, descriptor: any) {
       // 原始逻辑
       baz.call(this, val);
   }
-  return descriptor
 }
 
-// 属性装饰器
-function mua(option:string) {
+// 如果包一层，可以传递配置对象进来，更加灵活
+function mua(option: string) {
+  // 返回才是装饰器函数
+  // 接收两个参数：1-实例，2-属性名称
   return function (target, name) {
     target[name] = option
   }
@@ -205,3 +209,4 @@ class Foo {
 const foo = new Foo();
 // @ts-ignore
 foo.log();
+foo.setBar('abc')

@@ -1,14 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {RootState} from '@/types'
+import {user} from './user'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export default new Vuex.Store<RootState>({
   state: {
-    counter: 0
+    counter: 0,
   },
   getters: {
     doubleCounter(state) {
+      // state.counter
       return state.counter * 2
     }
   },
@@ -19,12 +22,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    add({ commit }) {
+    add({ commit, dispatch }) {
       setTimeout(() => {
         commit('add')
       }, 1000);
     }
   },
   modules: {
+    user
   }
 })

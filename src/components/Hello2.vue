@@ -1,16 +1,17 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    
   </div>
 </template>
 
 <script lang="ts">
 import { Prop, Vue } from 'vue-property-decorator';
 
+// 目标：返回组件构造函数
 function Component(options: any) {
   return function(target: any) {
-    
+    // 返回组件构造函数即可
+    return Vue.extend(options)
   }
 }
 

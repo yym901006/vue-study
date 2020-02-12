@@ -3,10 +3,10 @@ import App from './App.vue'
 import './plugins/element.js'
 import create from './utils/create'
 
-import router from './router'
+import router from './router/index'
 // import router from './krouter'
 
-import store from './store'
+import store from './store/index'
 // import store from './kstore'
 
 import './test-ts'

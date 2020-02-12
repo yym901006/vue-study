@@ -3,3 +3,12 @@ export interface Feature {
   name: string;
   desc?: string;
 }
+
+export interface RootState {
+  counter: number;
+}
+
+export interface UserState {
+  name: string,
+  token: string
+}
