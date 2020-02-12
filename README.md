@@ -1,4 +1,8 @@
-# study-vue
+# ts+vue实践
+- ts核心语法
+- ts+vue开发实践
+- 装饰器原理
+- vue-property-decorator源码解析
 
 ## Project setup
 ```
