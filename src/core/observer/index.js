@@ -44,6 +44,8 @@ export class Observer {
     this.dep = new Dep()
     this.vmCount = 0
     def(value, '__ob__', this)
+
+    // 判断value是对象还是数组
     if (Array.isArray(value)) {
       if (hasProto) {
         protoAugment(value, arrayMethods)
@@ -52,6 +54,7 @@ export class Observer {
       }
       this.observeArray(value)
     } else {
+      // 对象遍历响应化
       this.walk(value)
     }
   }
@@ -112,6 +115,8 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
     return
   }
   let ob: Observer | void
+
+  // 如果value已经是响应式对象
   if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
     ob = value.__ob__
   } else if (
@@ -121,6 +126,7 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
     Object.isExtensible(value) &&
     !value._isVue
   ) {
+    // 如果不是响应式对象则创建一个新实例
     ob = new Observer(value)
   }
   if (asRootData && ob) {
@@ -139,6 +145,7 @@ export function defineReactive (
   customSetter?: ?Function,
   shallow?: boolean
 ) {
+  // 每个key对应一个Dep
   const dep = new Dep()
 
   const property = Object.getOwnPropertyDescriptor(obj, key)
@@ -153,16 +160,23 @@ export function defineReactive (
     val = obj[key]
   }
 
-  let childOb = !shallow && observe(val)
+  // 数据拦截定义
+  let childOb = !shallow && observe(val) // 递归
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
     get: function reactiveGetter () {
+      // 获取value
       const value = getter ? getter.call(obj) : val
-      if (Dep.target) {
+      // 依赖收集
+      if (Dep.target) { // Watcher实例
+        // 创建dep和watcher之间的多对多关系映射
         dep.depend()
+        // 如果当前value是对象
         if (childOb) {
+          // 子ob中的dep和watcher创建关系
           childOb.dep.depend()
+          // 如果是数组还要遍历里面每个元素
           if (Array.isArray(value)) {
             dependArray(value)
           }
@@ -187,6 +201,7 @@ export function defineReactive (
       } else {
         val = newVal
       }
+      // 如果新对象还是对象，需要额外响应化处理
       childOb = !shallow && observe(newVal)
       dep.notify()
     }

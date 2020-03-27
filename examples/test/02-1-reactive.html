@@ -14,10 +14,15 @@
     <script>
         // 创建实例
         // 会有几个Observer？Dep？Watcher？
-        //            2      2    1
+                    //  2      4      1
+        // 只要出现一个对象就会出现一个ob
+        // 每个key都有一个dep
+        // 每个组件一个watcher
         const app = new Vue({
             el: '#demo',
-            data: { obj: { foo: 'foo' } },
+            data: {
+                obj: { foo: 'foo' }
+            },
             mounted() {
                 setTimeout(() => {
                     this.obj.foo = 'fooooo'
