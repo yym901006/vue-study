@@ -50,6 +50,8 @@ export function initState (vm: Component) {
   const opts = vm.$options
   if (opts.props) initProps(vm, opts.props)
   if (opts.methods) initMethods(vm, opts.methods)
+
+  // 数据响应式入口
   if (opts.data) {
     initData(vm)
   } else {
