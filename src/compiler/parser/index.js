@@ -76,24 +76,29 @@ export function createASTElement (
 /**
  * Convert HTML string to AST.
  */
+// <div>{{foo | date : 'MMMM'}}</div>
 export function parse (
   template: string,
   options: CompilerOptions
 ): ASTElement | void {
   warn = options.warn || baseWarn
 
+  // 选项预处理
   platformIsPreTag = options.isPreTag || no
   platformMustUseProp = options.mustUseProp || no
   platformGetTagNamespace = options.getTagNamespace || no
   const isReservedTag = options.isReservedTag || no
   maybeComponent = (el: ASTElement) => !!el.component || !isReservedTag(el.tag)
 
+  // 扩展编译功能
   transforms = pluckModuleFunction(options.modules, 'transformNode')
   preTransforms = pluckModuleFunction(options.modules, 'preTransformNode')
   postTransforms = pluckModuleFunction(options.modules, 'postTransformNode')
 
   delimiters = options.delimiters
 
+  // {{()}}
+  // <div></div>
   const stack = []
   const preserveWhitespace = options.preserveWhitespace !== false
   const whitespaceOption = options.whitespace
@@ -201,6 +206,7 @@ export function parse (
     }
   }
 
+  // 解析html模板
   parseHTML(template, {
     warn,
     expectHTML: options.expectHTML,
@@ -211,6 +217,7 @@ export function parse (
     shouldKeepComment: options.comments,
     outputSourceRange: options.outputSourceRange,
     start (tag, attrs, unary, start, end) {
+      // 遇到开始标签处理
       // check namespace.
       // inherit parent ns if there is one
       const ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag)
@@ -221,6 +228,7 @@ export function parse (
         attrs = guardIESVGBug(attrs)
       }
 
+      // 创建ast
       let element: ASTElement = createASTElement(tag, attrs, currentParent)
       if (ns) {
         element.ns = ns
@@ -277,6 +285,7 @@ export function parse (
         processRawAttrs(element)
       } else if (!element.processed) {
         // structural directives
+        // 处理结构性指令
         processFor(element)
         processIf(element)
         processOnce(element)
