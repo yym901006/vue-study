@@ -1,6 +1,11 @@
 <template>
   <div id="app">
+    <nav>
+      <router-link to="/">index</router-link>
+      <router-link to="/detail">detail</router-link>
+    </nav>
     <HelloWorld msg="Hello, Vue!"></HelloWorld>
+    <router-view></router-view>
   </div>
 </template>
 
