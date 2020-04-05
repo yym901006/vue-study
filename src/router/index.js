@@ -10,8 +10,8 @@ export function createRouter() {
   return new Router({
     mode: 'history',
     routes: [
-			{ path: "/", component: Index },
-      { path: "/detail", component: {template:'<div>detail page</div>'} }
+      { path: "/", component: Index },
+      { path: "/detail", component: { render: h => h('div', 'detail page') } }
     ]
   });
 }

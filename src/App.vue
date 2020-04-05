@@ -4,7 +4,7 @@
       <router-link to="/">index</router-link>
       <router-link to="/detail">detail</router-link>
     </nav>
-    <HelloWorld msg="Hello, Vue!"></HelloWorld>
+    <HelloWorld msg="Hello, Vue SSR!"></HelloWorld>
     <router-view></router-view>
   </div>
 </template>

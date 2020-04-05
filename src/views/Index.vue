@@ -1,13 +1,13 @@
 <template>
   <div>
-    index page
+    <h2 class="title">index page</h2>
     <p @click="$store.commit('add')">{{$store.state.count}}</p>
   </div>
 </template>
 
 <script>
 export default {
-  asyncData({ store, route }) {
+  asyncData({ store }) {
     // 约定预取逻辑编写在预取钩子asyncData中
     // 触发 action 后，返回 Promise 以便确定请求结果
     return store.dispatch("getCount");
@@ -15,5 +15,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.title {
+  color:red
+}
 </style>
