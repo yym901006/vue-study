@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello vue3</title>
+  <script src="../dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div>
+    <h1>composition api</h1>
+    <div id="app">
+      <p @click="add">count:{{count}}</p>
+      <p>{{counter}}</p>
+      <p ref="p1">doubleCount:{{doubleCount}}</p>
+    </div>
+  </div>
+  <script>
+    const { createApp, reactive, computed, onMounted, watch, ref, toRefs } = Vue
+
+    // 创建实例的方式变化了
+    const app = createApp({
+      setup() {
+        // 1.数据响应化
+        const state = reactive({
+          count: 1,
+          doubleCount: computed(() => state.count * 2)
+        })
+
+        // 单值响应化，包装之后返回Ref包装对象，它是可以响应式的
+        const counter = ref(0)
+        
+        function add() {
+          state.count++
+          // 如果要修改Ref对象
+          counter.value++
+        }
+
+        onMounted(() => {
+          console.log('mounted');
+
+        })
+
+        // 参数1函数是返回依赖
+        watch(() => state.count, (val, oldval) => {
+          console.log('count变了', val);
+        })
+        watch(counter, (val, oldval)=>{
+          console.log('counter变了');
+          
+        })
+
+
+        // 2.返回渲染函数上下文对象
+        // toRefs会把每个属性全部转换为Ref对象
+        return { ...toRefs(state), counter, add }
+      }
+    }).mount('#app') 
+  </script>
+</body>
+
+</html>

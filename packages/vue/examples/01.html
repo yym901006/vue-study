@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello vue3</title>
+  <script src="../dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1 @click="onclick">{{message}}</h1>
+    <comp></comp>
+  </div>
+  <script>
+    const {createApp} = Vue
+
+    // 创建实例的方式变化了
+    const app = createApp({
+      data: {
+        message: 'hello vue3'
+      },
+      methods: {
+        onclick() {
+          console.log('click me!');
+          
+        }
+      },
+    })
+    // 组件注册方式成为了实例方法
+    app.component('comp', {template:'<div>comp</div>'})
+    app.mount('#app') // $mount变成了mount
+  </script>
+</body>
+</html>
