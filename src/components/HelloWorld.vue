@@ -10,40 +10,47 @@
     <!-- 递归 -->
     <!-- <Recursion></Recursion> -->
     <!-- kvuex -->
-    <p @click="$store.commit('add')">counter: {{$store.state.counter}}</p>
-    <p @click="$store.dispatch('add')">async counter: {{$store.state.counter}}</p>
-    <!-- <p>{{$store.getters.doubleCount}}</p> -->
+    <p @click="$store.commit('add')">counter: {{ $store.state.counter }}</p>
+    <p @click="$store.dispatch('add')">
+      async counter: {{ $store.state.counter }}
+    </p>
+    <p>{{ $store.getters.doubleCount }}</p>
   </div>
 </template>
 
 <script>
-import Communication from '@/components/communication';
-import FormExample from '@/components/form';
-import SlotExample from '@/components/slots';
-import Recursion from '@/components/recursion'
+import Communication from "@/components/communication";
+import FormExample from "@/components/form";
+import SlotExample from "@/components/slots";
+import Recursion from "@/components/recursion";
 
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   components: {
     Communication,
     FormExample,
     SlotExample,
-    Recursion
+    Recursion,
   },
+  // created() {
+  //   console.info("$store.getters", this.$store.getters=1);
+  // },
   methods: {
     onFoo() {
-      console.log('onFoo in HelloWorld');
-      
-    }
+      console.log("onFoo in HelloWorld");
+    },
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+p {
+  cursor: pointer;
+}
 h3 {
   margin: 40px 0 0;
 }

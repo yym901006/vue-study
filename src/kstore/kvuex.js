@@ -7,68 +7,91 @@ class Store {
     // 定义响应式的state
     // this.$store.state.xx
     // 借鸡生蛋
+
+    // 根据getters配置生成 computed
+    const computed = {};
+    if (options.getters) {
+      Object.keys(options.getters).map((key) => {
+        computed[key] = options.getters[key].bind(this, options.state);
+      });
+    }
+
     this._vm = new Vue({
       data: {
-        $$state: options.state
-      }
-    })
-    
-    this._mutations = options.mutations
-    this._actions = options.actions
+        $$state: options.state,
+        $$getters: {},
+      },
+      computed,
+    });
+
+    this._mutations = options.mutations;
+    this._actions = options.actions;
 
     // 绑定this指向
-    this.commit = this.commit.bind(this)
-    this.dispatch = this.dispatch.bind(this)
+    this.commit = this.commit.bind(this);
+    this.dispatch = this.dispatch.bind(this);
+  }
+
+  // getters属性
+  get getters() {
+    Object.keys(this._vm.$options.computed).map((key) => {
+      this._vm._data.$$getters[key] = this._vm[key];
+    });
+    return this._vm._data.$$getters;
+  }
+
+  // 只读属性不允许改写
+  set getters(val) {
+    console.error("getters为只读属性不允许改写");
   }
 
   // 只读
   get state() {
-    return this._vm._data.$$state
+    return this._vm._data.$$state;
   }
 
   set state(val) {
-    console.error('不能直接赋值呀，请换别的方式！！天王盖地虎！！');
-    
+    console.error("不能直接赋值呀，请换别的方式！！天王盖地虎！！");
   }
-  
+
   // 实现commit方法，可以修改state
   commit(type, payload) {
     // 拿出mutations中的处理函数执行它
-    const entry = this._mutations[type]
+    const entry = this._mutations[type];
     if (!entry) {
-      console.error('未知mutaion类型');
-      return
+      console.error("未知mutaion类型");
+      return;
     }
 
-    entry(this.state, payload)
+    entry(this.state, payload);
   }
 
   dispatch(type, payload) {
-    const entry = this._actions[type]
+    const entry = this._actions[type];
 
     if (!entry) {
-      console.error('未知action类型');
-      return
+      console.error("未知action类型");
+      return;
     }
 
     // 上下文可以传递当前store实例进去即可
-    entry(this, payload)
+    entry(this, payload);
   }
 }
 
-function install(_Vue){
-  Vue = _Vue
+function install(_Vue) {
+  Vue = _Vue;
 
   // 混入store实例
   Vue.mixin({
     beforeCreate() {
       if (this.$options.store) {
-        Vue.prototype.$store = this.$options.store
+        Vue.prototype.$store = this.$options.store;
       }
-    }
-  })
+    },
+  });
 }
 
 // { Store, install }相当于Vuex
 // 它必须实现install方法
-export default { Store, install }
+export default { Store, install };
